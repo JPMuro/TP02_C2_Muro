@@ -25,9 +25,11 @@ public class CarStats : MonoBehaviour
     {
         currentHealth -= damage;
 
+        currentHealth = Mathf.Max(0, currentHealth);
+
         if (currentHealth <= 0)
         {
-            Debug.Log("Vehículo destruido");
+            Debug.Log("Vehículo destruido :(");
             Time.timeScale = 0f;
         }
     }
