@@ -1,31 +1,40 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
-    public float speed = 10f;
-    public float turnSpeed = 100f;
+    public CarConfigurationSO config;
 
-    void Update()
+    private Rigidbody rb;
+    private float currentSpeed;
+
+    private void Start()
     {
-        if (Input.GetKey(KeyCode.W))
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+        Vector3 force = transform.forward * v * config.acceleration;
+        rb.AddForce(force);
+
+        transform.Rotate(Vector3.up * h * 100f * Time.fixedDeltaTime);
+
+        if (rb.linearVelocity.magnitude > config.maxSpeed)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            rb.linearVelocity = rb.linearVelocity.normalized * config.maxSpeed;
         }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-        }
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, config.friction * Time.fixedDeltaTime);
 
-        // Girar
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.up * -turnSpeed * Time.deltaTime);
-        }
+        currentSpeed = rb.linearVelocity.magnitude;
+    }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
-        }
+    public float GetSpeed()
+    {
+        return currentSpeed;
     }
 }

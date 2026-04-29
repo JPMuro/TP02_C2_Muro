@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae076d12166e9e8409d5b89e21a3f278, type: 3}
   m_Name: CarConfig
   m_EditorClassIdentifier: Assembly-CSharp::CarConfigurationSO
-  maxSpeed: 20
-  acceleration: 10
-  turnSpeed: 100
-  maxHealth: 100
-  maxFuel: 100
+  maxSpeed: 100
+  acceleration: 50
+  friction: 5
+  maxHealth: 30
+  maxFuel: 30

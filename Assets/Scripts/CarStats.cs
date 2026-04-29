@@ -3,47 +3,42 @@ using UnityEngine;
 public class CarStats : MonoBehaviour
 {
     public CarConfigurationSO config;
-    public float health;
-    public float fuel;
-    private Rigidbody rb;
 
-    void Start()
+    public float currentHealth;
+    public float currentFuel;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        health = config.maxHealth;
-        fuel = config.maxFuel;
+        currentHealth = config.maxHealth;
+        currentFuel = config.maxFuel;
     }
 
-    void Update()
+    private void Update()
     {
-        if (rb.linearVelocity.magnitude > 1f)
+        if (currentFuel > 0)
         {
-            fuel -= Time.deltaTime * 2f;
+            currentFuel -= Time.deltaTime * 2f;
         }
-        fuel = Mathf.Clamp(fuel, 0, config.maxFuel);
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void TakeDamage(float damage)
     {
-        float damage = rb.linearVelocity.magnitude * 2f;
-        health -= damage;
+        currentHealth -= damage;
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
+            Debug.Log("Vehículo destruido");
             Time.timeScale = 0f;
-            gameObject.SetActive(false);
         }
     }
 
     public void Repair(float amount)
     {
-        health += amount * Time.deltaTime;
-        health = Mathf.Clamp(health, 0, config.maxHealth);
+        currentHealth = Mathf.Min(currentHealth + amount, config.maxHealth);
     }
 
     public void Refuel(float amount)
     {
-        fuel += amount * Time.deltaTime;
-        fuel = Mathf.Clamp(fuel, 0, config.maxFuel);
+        currentFuel = Mathf.Min(currentFuel + amount, config.maxFuel);
     }
 }
