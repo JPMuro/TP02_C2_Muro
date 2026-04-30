@@ -10,7 +10,9 @@ public class RepairZone : MonoBehaviour
 
         if (stats != null)
         {
-            stats.Repair(repairRate * Time.deltaTime);
+            stats.currentHealth += repairRate * Time.deltaTime;
+
+            stats.currentHealth = Mathf.Min(stats.currentHealth, stats.config.maxHealth); // Para no pasarse del maximo
         }
     }
 }

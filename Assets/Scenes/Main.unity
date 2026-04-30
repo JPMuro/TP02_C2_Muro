@@ -1153,6 +1153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ecdc4442a94b1a4e996a7daf2df6dd1, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2888450574401730051, guid: 1ecdc4442a94b1a4e996a7daf2df6dd1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.5
@@ -1553,7 +1557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cbcf21219484f4d8d2629c50d560a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepairZone
-  repairRate: 10
+  repairRate: 2
 --- !u!23 &1537672459
 MeshRenderer:
   m_ObjectHideFlags: 0
