@@ -13,9 +13,9 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        fuelBar.value = stats.currentFuel / stats.config.maxFuel;
+        fuelBar.value = stats.fuel / stats.maxFuel;
 
         speedText.text = "Velocidad: " + Mathf.Round(controller.GetSpeed());
-        healthText.text = "Vida: " + Mathf.Round(stats.currentHealth);
+        healthText.text = "Vida: " + Mathf.Round(stats.health);
     }
 }

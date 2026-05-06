@@ -1,20 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
     public CarConfigurationSO config;
 
     private Rigidbody rb;
     private float currentSpeed;
+    private CarStats stats;
 
     private void Start()
     {
+        stats = GetComponent<CarStats>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
+        // No fuel, no movement
+        if (!stats.HasFuel)
+            return;
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 

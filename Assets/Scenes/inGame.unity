@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 34, y: -63}
+  m_AnchoredPosition: {x: 34, y: -65}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &312162143
@@ -850,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1391, y: -70}
+  m_AnchoredPosition: {x: -1391, y: -65}
   m_SizeDelta: {x: 150, y: 35}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &913627876
@@ -1293,9 +1293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efad7e0972cae643b4b8bb0e49e45d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarStats
-  config: {fileID: 11400000, guid: 362521e9ea1017349bdb5091da81c023, type: 2}
-  currentHealth: 10
-  currentFuel: 30
+  fuel: 100
+  maxFuel: 100
+  health: 100
+  maxHealth: 100
+  fuelConsumption: 5
 --- !u!114 &1321929710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,6 +1436,7 @@ GameObject:
   - component: {fileID: 1487514733}
   - component: {fileID: 1487514732}
   - component: {fileID: 1487514730}
+  - component: {fileID: 1487514735}
   m_Layer: 0
   m_Name: FuelZone
   m_TagString: Untagged
@@ -1520,12 +1523,35 @@ Transform:
   m_GameObject: {fileID: 1487514729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 11, z: -25.7}
+  m_LocalPosition: {x: 17, y: 14, z: -23}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1487514735
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487514729}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1537672456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1564,7 @@ GameObject:
   - component: {fileID: 1537672460}
   - component: {fileID: 1537672459}
   - component: {fileID: 1537672457}
+  - component: {fileID: 1537672462}
   m_Layer: 0
   m_Name: RepairZone
   m_TagString: Untagged
@@ -1557,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cbcf21219484f4d8d2629c50d560a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepairZone
-  repairRate: 2
+  repairRate: 10
 --- !u!23 &1537672459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1624,12 +1651,35 @@ Transform:
   m_GameObject: {fileID: 1537672456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 11, z: -25.7}
+  m_LocalPosition: {x: -17, y: 14, z: -23}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1537672462
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537672456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1551019930
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,45 +2,59 @@ using UnityEngine;
 
 public class CarStats : MonoBehaviour
 {
-    public CarConfigurationSO config;
+    public float fuel = 100f;
+    public float maxFuel = 100f;
 
-    public float currentHealth;
-    public float currentFuel;
+    public float health = 100f;
+    public float maxHealth = 100f;
 
-    private void Start()
+    public float fuelConsumption = 5f;
+
+    public bool HasFuel => fuel > 0f;
+
+    void Update()
     {
-        currentHealth = config.maxHealth;
-        currentFuel = config.maxFuel;
+        ConsumeFuel();
     }
 
-    private void Update()
+    void ConsumeFuel()
     {
-        if (currentFuel > 0)
+        float moveInput = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
+
+        if (moveInput > 0.1f && fuel > 0f)
         {
-            currentFuel -= Time.deltaTime * 2f;
+            fuel -= fuelConsumption * Time.deltaTime;
+            fuel = Mathf.Clamp(fuel, 0, maxFuel);
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        currentHealth = Mathf.Max(0, currentHealth);
-
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Vehículo destruido :(");
-            Time.timeScale = 0f;
-        }
-    }
-
-    public void Repair(float amount)
-    {
-        currentHealth = Mathf.Min(currentHealth + amount, config.maxHealth);
     }
 
     public void Refuel(float amount)
     {
-        currentFuel = Mathf.Min(currentFuel + amount, config.maxFuel);
+        fuel += amount;
+        fuel = Mathf.Clamp(fuel, 0, maxFuel);
     }
+
+    public void Repair(float amount)
+    {
+        health = Mathf.Clamp(health + amount, 0, maxHealth);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Car destroyed");
+        // optional:
+        // disable movement, show UI, etc.
+        gameObject.SetActive(false);
+    }
+
 }
